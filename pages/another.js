@@ -1,8 +1,12 @@
 import AnotherView from "../views/another";
 import renderLayout from "../views/renderLayout";
+import hoc from "../hocs/page";
 
-const Page = AnotherView;
+const Page = hoc()(AnotherView);
 
-Page.renderLayout = renderLayout();
+Page.renderLayout = renderLayout({
+  mapLayoutProps: { detailPaneOpen: false },
+  sidebarLayoutProps: { collapsed: false, overridePreference: true }
+});
 
 export default Page;

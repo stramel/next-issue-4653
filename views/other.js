@@ -2,12 +2,15 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { startClock, addCount, serverRenderClock } from "../store";
 import { connect } from "react-redux";
-import Page from "../components/Page";
+import { Link } from "../routes";
+import Clock from "../components/Clock";
+import AddCount from "../components/AddCount";
 
 class Counter extends React.Component {
   static getInitialProps({ store, isServer }) {
     store.dispatch(serverRenderClock(isServer));
     store.dispatch(addCount());
+
     return { isServer };
   }
 
@@ -20,7 +23,25 @@ class Counter extends React.Component {
   }
 
   render() {
-    return <Page title="Other Page" linkTo="another" />;
+    const title = "OTHER";
+    const { lastUpdate, light } = this.props;
+
+    return (
+      <React.Fragment>
+        <h1>{title}</h1>
+        <Clock lastUpdate={lastUpdate} light={light} />
+        <AddCount />
+        <div
+          className="nav"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <Link route="alt">Alt</Link>
+          <Link route="home">index</Link>
+          <Link route="another">Another</Link>
+          <Link route="test">Test</Link>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 
@@ -31,7 +52,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Counter);
+export default connect(state => state, mapDispatchToProps)(Counter);

@@ -7,21 +7,26 @@ export default compose(withRouter)(
     constructor(props) {
       super(props);
 
-      console.log("Layout -- constructor");
+      console.log("AltLayout -- constructor");
     }
 
     componentDidMount() {
-      console.log("Layout -- componentDidMount");
+      console.log("AltLayout -- componentDidMount");
     }
 
     componentWillUnmount() {
-      console.log("Layout -- componentWillUnmount");
+      console.log("AltLayout -- componentWillUnmount");
     }
 
     render() {
-      console.log("Layout -- render");
+      console.log("AltLayout -- render");
       const { children } = this.props;
-      return <div className="layout">{children}</div>;
+      return (
+        <div className="alt-layout">
+          <div>Some content</div>
+          <div>{children}</div>
+        </div>
+      );
     }
   }
 );

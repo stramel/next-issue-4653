@@ -1,15 +1,15 @@
 import React from "react";
 import Layout from "../layouts/Layout";
-import IndexView from "../views";
 import SidebarLayout from "../layouts/SidebarLayout";
-import hoc from "../hocs/page";
-import { isNullish } from "../util";
+import TestView from "../views/test";
+import { isNullish, noop } from "../util/index";
 
-const Page = hoc()(IndexView);
+const Page = TestView;
 
 let a = {};
+
 if (isNullish(a)) {
-  a = {};
+  a = noop;
 }
 
 Page.renderLayout = ({ children }) => (

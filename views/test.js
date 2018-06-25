@@ -2,6 +2,8 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { startClock, addCount, serverRenderClock } from "../store";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withRouter } from "next/router";
 import { Link } from "../routes";
 import Clock from "../components/Clock";
 import AddCount from "../components/AddCount";
@@ -23,7 +25,7 @@ class Counter extends React.Component {
   }
 
   render() {
-    const title = "INDEX";
+    const title = "TEST";
     const { lastUpdate, light } = this.props;
 
     return (
@@ -38,7 +40,7 @@ class Counter extends React.Component {
           <Link route="alt">Alt</Link>
           <Link route="other">Other</Link>
           <Link route="another">Another</Link>
-          <Link route="test">test</Link>
+          <Link route="home">index</Link>
         </div>
       </React.Fragment>
     );
@@ -52,4 +54,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(state => state, mapDispatchToProps)(Counter);
+export default compose(withRouter, connect(state => state, mapDispatchToProps))(
+  Counter
+);
